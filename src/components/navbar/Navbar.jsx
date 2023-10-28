@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import style from "./navbar.module.css";
 import { Link } from "react-router-dom";
 
-import "primeicons/primeicons.css";
-
 export const Navbar = () => {
 	const [toggle, setToggle] = useState(false);
 

@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./card.module.css";
+import { Button } from "primereact/button";
 
 export const Card = ({ id, name, img, Genres }) => {
 	const handleClick = (id) => {
@@ -20,9 +21,13 @@ export const Card = ({ id, name, img, Genres }) => {
 							<li key={genre.id}>{genre.name}</li>
 						))}
 					</p>
-					<button type="button" value={id} onClick={() => handleClick(id)}>
-						Show
-					</button>
+					<Button
+						className={style.info}
+						type="button"
+						label="+ info"
+						value={id}
+						onClick={() => handleClick(id)}
+					/>
 				</div>
 			</div>
 			{/* ----------------------------------------------- */}
@@ -38,10 +43,11 @@ export const Card = ({ id, name, img, Genres }) => {
 						<p className={style.h1}>{name}</p>
 					</div>
 					<p className={style.p}>
-						{Genres.map((genre) => (
-							<li key={genre.id} className={style.li}>
+						{Genres.map((genre, i) => (
+							<React.Fragment key={genre.id}>
 								{genre.name}
-							</li>
+								{i < Genres.length - 1 ? ", " : "."}
+							</React.Fragment>
 						))}
 					</p>
 					<div></div>

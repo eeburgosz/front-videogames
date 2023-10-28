@@ -1,0 +1,136 @@
+.container{
+   width: 100%;
+   min-width: fit-content;
+   padding-top: 4rem;
+}
+
+.container button{
+   align-content: center;
+}
+
+.subcontainer{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.subcontainer button{
+   width: 6rem;
+}
+
+/*  */
+
+.input__container{
+   display: flex;
+   flex-direction: column;
+   align-items: center;   
+}
+
+.input__container label{
+   margin-bottom: 0.5rem;
+}
+
+.radio__input input {
+   display: none;
+}
+
+.radio__input {
+   --container_width: .15s;
+   position: relative;
+   display: flex;
+   align-items: center;   
+   border-radius: 10px;
+   background-color: #040d19;
+   color: rgba(255, 255, 255, 0.87);
+   width: var(--container_width);
+   overflow: hidden;
+   border: 1px solid rgba(53, 52, 52, 0.226);
+}
+
+.radio__input label {
+   width: 100%;
+   padding-top: 10px;
+   padding-left: 10px;
+   padding-right: 10px;
+   padding-bottom: 5px;      
+   cursor: pointer;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 1;
+   font-weight: 600;
+   font-size: 12px;
+}
+
+.selection {
+   display: none;
+   position: absolute;
+   height: 100%;
+   width: calc(var(--container_width) / 3);
+   z-index: 0;
+   left: 0;
+   top: 0;
+   transition: .15s ease;
+}
+
+.radio__input label:has(input:checked) {
+   color: #5EEAD4;
+   font-weight: 800;
+}
+
+.radio__input label:has(input:checked)~.selection {
+   background-color: rgb(11 117 223);
+   display: inline-block;
+}
+
+.radio__input label:nth-child(1):has(input:checked)~.selection {
+   transform: translateX(calc(var(--container_width) * 0/3));
+}
+
+.radio__input label:nth-child(2):has(input:checked)~.selection {
+   transform: translateX(calc(var(--container_width) * 1/3));
+}
+
+.radio__input label:nth-child(3):has(input:checked)~.selection {
+   transform: translateX(calc(var(--container_width) * 2/3));
+}
+/*  */
+
+.custom__dropdown span {
+   font-size: 12px !important;
+}
+.dropdown__container{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-top: 1rem;
+}
+
+.dropdown__container label{
+   margin-bottom: 0.5rem;
+}
+
+.refresh{
+   display: flex;
+   margin-top: 2rem;
+   justify-content: center;
+}
+
+@media (max-width: 768px) {
+   .container{
+      display: flex;
+      padding-top: 1rem;
+      flex-direction: column;
+   }
+   .subcontainer{
+      /* display: flex;
+      flex-direction: row;
+      flex-wrap: wrap; */
+      display: grid;
+         grid-template-columns: 50% 1fr;
+         gap: 1rem;
+   }
+   .dropdown__container{
+      margin: 0;
+   }
+}
