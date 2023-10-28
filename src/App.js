@@ -1,11 +1,11 @@
 // import './App.css';
 
-import { HomeView } from "./views/Home/HomeView";
+import { AppRoutes } from "./routes/AppRoutes";
 
 function App() {
   return (
     <div className="App">
-      <HomeView />
+      <AppRoutes />
     </div>
   );
 }

@@ -1,12 +1,9 @@
 import React from "react";
 import style from "./card.module.css";
 import { Button } from "primereact/button";
+import { Link } from "react-router-dom";
 
 export const Card = ({ id, name, img, Genres }) => {
-	const handleClick = (id) => {
-		console.log(id);
-	};
-
 	return (
 		<>
 			<div className={style.card__}>
@@ -21,22 +18,19 @@ export const Card = ({ id, name, img, Genres }) => {
 							<li key={genre.id}>{genre.name}</li>
 						))}
 					</p>
-					<Button
-						className={style.info}
-						type="button"
-						label="+ info"
-						value={id}
-						onClick={() => handleClick(id)}
-					/>
+					<Link to={`/videogame/${id}`}>
+						<Button
+							className={style.info}
+							type="button"
+							label="+ info"
+							value={id}
+						/>
+					</Link>
 				</div>
 			</div>
 			{/* ----------------------------------------------- */}
-			<button
-				value={id}
-				type="button"
-				className={style.card}
-				onClick={() => handleClick(id)}
-			>
+
+			<Link to={`/videogame/${id}`} className={style.card}>
 				<img src={img} alt={name} className={style.img} />
 				<div className={style.textBox}>
 					<div className={style.textContent}>
@@ -52,7 +46,7 @@ export const Card = ({ id, name, img, Genres }) => {
 					</p>
 					<div></div>
 				</div>
-			</button>
+			</Link>
 		</>
 	);
 };

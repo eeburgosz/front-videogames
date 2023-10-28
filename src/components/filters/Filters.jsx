@@ -83,6 +83,15 @@ export const Filters = () => {
 						<label>
 							<input
 								type="radio"
+								id="value-3"
+								name="value-radio"
+								value="value-3"
+							/>
+							<span>ALL</span>
+						</label>
+						<label>
+							<input
+								type="radio"
 								id="value-1"
 								name="value-radio"
 								value="value-1"
@@ -97,15 +106,6 @@ export const Filters = () => {
 								value="value-2"
 							/>
 							<span>API</span>
-						</label>
-						<label>
-							<input
-								type="radio"
-								id="value-3"
-								name="value-radio"
-								value="value-3"
-							/>
-							<span>ALL</span>
 						</label>
 					</div>
 				</div>

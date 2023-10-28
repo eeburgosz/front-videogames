@@ -48,7 +48,7 @@
    left: 0;
    width: 100%;
    height: 100%;
-   padding: 20px;
+   padding: 5px;
    border: 2px solid #a1a1a1;
    border-radius: 10px;
    box-sizing: border-box;
@@ -59,13 +59,14 @@
    text-align: center;
 }
 
+
 .card__:hover .card__content {
    transform: rotateX(0deg);
 }
 
 .card__title {
    margin: 0;
-   font-size: 24px;
+   font-size: 20px;
    color: #ffffff95;
    font-weight: 700;
 }
@@ -79,7 +80,7 @@
 }
 
 .info{
-   height: 2rem;
+   height: 1rem;
 }
 
 @media (max-width: 768px) {
@@ -100,6 +101,7 @@
       transition: 0.5s ease-in-out;
       box-shadow: 0 0 0 1px #ffffff80;
       transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-decoration: none;
    }
 
    .card:hover {
@@ -109,6 +111,8 @@
 
    .img {
       height: 5rem;
+      max-width: 8rem;
+      object-fit: cover;
       margin-left: 10px;
       border-radius: 10px;
       background: linear-gradient(#d7cfcf, #9198e5);

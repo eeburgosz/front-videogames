@@ -122,10 +122,10 @@
       padding-top: 1rem;
       flex-direction: column;
    }
+      .container button {
+         margin-bottom: 1rem;
+      }
    .subcontainer{
-      /* display: flex;
-      flex-direction: row;
-      flex-wrap: wrap; */
       display: grid;
          grid-template-columns: 50% 1fr;
          gap: 1rem;
