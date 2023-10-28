@@ -1,4 +1,5 @@
-.container {
+
+.cards__container {
    display: grid;
    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
    row-gap: 2rem;
@@ -10,8 +11,25 @@
 @media (max-width: 768px) {
    .container {
       display: flex;
-      flex-direction: column;      
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1rem;
+   }
+
+   .cards__container {
+      display: flex;
+      flex-direction: column;
       row-gap: 1rem;
       margin-bottom: 2rem;
+   }
+
+   .paginator {
+      padding: 0;
+   }
+   .paginator button{
+      margin: 0;
+   }
+   .paginator span > button:nth-child(5) {
+      display: none;
    }
 }
