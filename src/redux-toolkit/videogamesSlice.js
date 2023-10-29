@@ -16,11 +16,16 @@ export const videogamesSlice = createSlice({
          state.allVideogames = action.payload;
          state.auxAllVideogames = action.payload;
          state.isLoading = false;
+      },
+      setVideogameById: (state, action) => {
+         state.videogame = action.payload;
+         state.isLoading = false;
       }
    }
 });
 
 export const {
    startLoading,
-   setAllVideogames
+   setAllVideogames,
+   setVideogameById
 } = videogamesSlice.actions;
