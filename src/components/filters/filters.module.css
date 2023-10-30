@@ -18,6 +18,11 @@
    width: 6rem;
 }
 
+.skeleton {
+   width: 100% !important;
+   height: 25rem !important;
+}
+
 /*  */
 
 .input__container {
@@ -137,5 +142,10 @@
 
    .dropdown__container {
       margin: 0;
+   }
+
+   .skeleton {
+      width: 100% !important;
+      height: 15rem !important;
    }
 }

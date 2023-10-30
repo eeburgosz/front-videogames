@@ -4,18 +4,22 @@ import { Card } from "../";
 import { getAllVideogames } from "../../redux-toolkit/thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { Paginator } from "primereact/paginator";
-//! archivo mock para data
-import { data } from "../../utils/mock";
+import { Skeleton } from "primereact/skeleton";
+
+const skeletons = [];
+for (let i = 0; i < 15; i++) {
+	skeletons.push(<Skeleton key={i} className={style.skeleton}></Skeleton>);
+}
 
 export const CardsContainer = () => {
-	//! Por ahora uso archivo mock para poder ver por túnel dev
-	// const dispatch = useDispatch();
-	// useEffect(() => {
-	// 	dispatch(getAllVideogames());
-	// }, [dispatch]);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getAllVideogames());
+	}, [dispatch]);
 
-	// const { allVideogames: data } = useSelector((state) => state.videogames);
-	//!---------------------------------------------------------
+	const { allVideogames: data, isLoading } = useSelector(
+		(state) => state.videogames
+	);
 
 	const [first, setFirst] = useState(0);
 	const [rows, setRows] = useState(15);
@@ -31,26 +35,34 @@ export const CardsContainer = () => {
 
 	return (
 		<div className={style.container}>
-			<div className={style.cards__container}>
-				{dataPerPage().map((d) => (
-					<Card
-						key={d.id}
-						id={d.id}
-						name={d.name}
-						img={d.img}
-						Genres={d.Genres}
-					/>
-				))}
-			</div>
-			<div className={`card`}>
-				<Paginator
-					first={first}
-					rows={rows}
-					totalRecords={data.length}
-					onPageChange={onPageChange}
-					className={style.paginator}
-				/>
-			</div>
+			{isLoading ? (
+				<div className={style.cards__container}>{skeletons}</div>
+			) : data.length === 0 ? (
+				<h2 className={style.empty}>No videogames found</h2>
+			) : (
+				<>
+					<div className={style.cards__container}>
+						{dataPerPage().map((d) => (
+							<Card
+								key={d.id}
+								id={d.id}
+								name={d.name}
+								img={d.img}
+								Genres={d.Genres}
+							/>
+						))}
+					</div>
+					<div className={`card`}>
+						<Paginator
+							first={first}
+							rows={rows}
+							totalRecords={data.length}
+							onPageChange={onPageChange}
+							className={style.paginator}
+						/>
+					</div>
+				</>
+			)}
 		</div>
 	);
 };

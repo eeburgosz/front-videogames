@@ -1,12 +1,27 @@
 import React, { useState } from "react";
 import style from "./navbar.module.css";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getVideogamesByName } from "../../redux-toolkit/thunks";
 
 export const Navbar = () => {
+	const dispatch = useDispatch();
+
 	const [toggle, setToggle] = useState(false);
+	const [value, setValue] = useState("");
 
 	const handleClick = (e) => {
 		setToggle(e.target.checked);
+	};
+
+	const handleChange = (e) => {
+		setValue(e.target.value);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setValue("");
+		dispatch(getVideogamesByName(value));
 	};
 
 	return (
@@ -28,12 +43,16 @@ export const Navbar = () => {
 					<i className="pi pi-info-circle"></i>
 					<span>About me</span>
 				</Link>
-				<div>
-					<input type="text" className={style.input} placeholder="Search..." />
-				</div>
+				<form onSubmit={handleSubmit}>
+					<input
+						value={value}
+						type="text"
+						className={style.input}
+						placeholder="Search..."
+						onChange={handleChange}
+					/>
+				</form>
 			</div>
-
-			{/* ------------------------------------- */}
 			{window.innerWidth <= 768 ? (
 				<>
 					<input
