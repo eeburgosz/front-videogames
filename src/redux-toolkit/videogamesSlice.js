@@ -6,7 +6,7 @@ export const videogamesSlice = createSlice({
       isLoading: false,
       allVideogames: [],
       auxAllVideogames: [],
-      auxSourceVideogames: [],
+      auxSourceAndGenresVideogames: [],
       videogame: {},
       allGenres: [],
    },
@@ -31,17 +31,17 @@ export const videogamesSlice = createSlice({
          state.allGenres = action.payload;
          state.isLoading = false;
       },
-      setVideogamesBySource: (state, action) => {
-         state.allVideogames = action.payload;
-         state.auxSourceVideogames = action.payload;
-         state.isLoading = false;
-      },
-      setVideogameByGenres: (state, action) => {
+      setFilterBySort: (state, action) => {
          state.allVideogames = action.payload;
          state.isLoading = false;
       },
-      setCombinedFilter: (state, action) => {
+      setFilterByRating: (state, action) => {
          state.allVideogames = action.payload;
+         state.isLoading = false;
+      },
+      setFilterBySourceAndGenres: (state, action) => {
+         state.allVideogames = action.payload;
+         state.auxSourceAndGenresVideogames = action.payload;
          state.isLoading = false;
       }
    }
@@ -53,7 +53,7 @@ export const {
    setVideogameById,
    setVideogamesByName,
    setAllGenres,
-   setVideogamesBySource,
-   setVideogameByGenres,
-   setCombinedFilter
+   setFilterBySourceAndGenres,
+   setFilterBySort,
+   setFilterByRating
 } = videogamesSlice.actions;

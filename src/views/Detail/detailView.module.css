@@ -5,7 +5,7 @@
 }
 
 .chart {
-   width: 40%;
+   width: 35rem;
    margin: 2rem;
 }
 
@@ -138,6 +138,9 @@
 }
 
 @media (max-width: 768px) {
+   .name{
+      text-align: center;
+   }
    .platform {
       width: 100vw;
       display: grid;
@@ -146,9 +149,18 @@
    }
 
    .chart {
-      width: 80vw;
-      align-self: center;
+      display: inline;
+      width: 30rem !important;
+      align-items: center !important;
+      justify-content: center !important;
    }
+      .chart__position{
+         display: block;
+         width: 30rem !important;
+         align-self: center !important;
+         justify-self: center !important;
+
+      }
 
    .img {
       width: 100vw;

@@ -61,6 +61,23 @@ export const DetailView = () => {
 			};
 			const options = {
 				cutout: "50%",
+				plugins: {
+					legend: {
+						display: true,
+						labels: {
+							fontColor: "black",
+						},
+					},
+					tooltip: {
+						callbacks: {
+							label: (context) => {
+								const label = context.label || "";
+								const value = context.parsed || 0;
+								return `${label}: ${value}%`;
+							},
+						},
+					},
+				},
 			};
 
 			setChartData(data);
@@ -79,7 +96,7 @@ export const DetailView = () => {
 			) : (
 				<>
 					<img className={style.img} src={videogame.img} alt={videogame.name} />
-					<h1>{videogame.name}</h1>
+					<h1 className={style.name}>{videogame.name}</h1>
 					<span>Released: {videogame.released}</span>
 					<div className={style.description}>
 						<Fieldset legend="Description">
@@ -119,7 +136,13 @@ export const DetailView = () => {
 					<hr className={style.divider} />
 					<h2>Ratings</h2>
 					<div className={`${style.chart} `}>
-						<Chart type="doughnut" data={chartData} options={chartOptions} />
+						<Chart
+							className={style.chart__position}
+							type="doughnut"
+							height="500px"
+							data={chartData}
+							options={chartOptions}
+						/>
 					</div>
 					<div className="card flex justify-content-center">
 						<Button

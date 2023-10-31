@@ -5,9 +5,9 @@ import { Button } from "primereact/button";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-	getCombinedFilters,
-	getFilterByGenres,
-	getFilterBySource,
+	getFilterByRating,
+	getFilterBySort,
+	getFilterBySourceAndGenres,
 	getGenres,
 } from "../../redux-toolkit/thunks";
 import { Skeleton } from "primereact/skeleton";
@@ -40,6 +40,20 @@ export const Filters = () => {
 			[e.target.name]: e.value,
 		});
 	};
+	const handleChangeSort = (e) => {
+		setValue({
+			...value,
+			rating: null,
+			[e.target.name]: e.value,
+		});
+	};
+	const handleChangeRating = (e) => {
+		setValue({
+			...value,
+			sort: null,
+			[e.target.name]: e.value,
+		});
+	};
 	const handleChange = (e) => {
 		setValue({
 			...value,
@@ -48,24 +62,13 @@ export const Filters = () => {
 		setSelected(e.target.value);
 	};
 
-	// console.log(value);
+	//!---------------------------
 	useEffect(() => {
-		dispatch(getFilterBySource(value.source));
-	}, [dispatch, value.source]);
-
-	useEffect(() => {
-		// dispatch(getFilterBySource(value.source));
-		dispatch(getFilterByGenres({ genres: value.genres }));
-	}, [dispatch, /* value.source, */ value.genres]);
-
-	useEffect(() => {
-		dispatch(
-			getCombinedFilters({
-				sort: value.sort,
-				rating: value.rating,
-			})
-		);
-	}, [dispatch, value.sort, value.rating]);
+		dispatch(getFilterBySourceAndGenres(value.source, value.genres));
+		dispatch(getFilterBySort(value.sort));
+		dispatch(getFilterByRating(value.rating));
+	}, [dispatch, value.rating, value.sort, value.source, value.genres]);
+	//!---------------------------
 
 	const navigete = useNavigate();
 	const location = useLocation();
@@ -143,10 +146,10 @@ export const Filters = () => {
 							<Dropdown
 								id="sort"
 								value={value.sort}
-								onChange={handleSelectChange}
+								onChange={handleChangeSort}
 								options={sort}
 								optionLabel="name"
-								showClear
+								// showClear
 								name="sort"
 								placeholder="Select a sort"
 								className={`${style.custom__dropdown} w-full md:w-14rem`}
@@ -158,10 +161,10 @@ export const Filters = () => {
 								<Dropdown
 									id="rating"
 									value={value.rating}
-									onChange={handleSelectChange}
+									onChange={handleChangeRating}
 									options={rating}
 									optionLabel="name"
-									showClear
+									// showClear
 									name="rating"
 									placeholder="Select a rating"
 									className={`${style.custom__dropdown} w-full md:w-14rem`}

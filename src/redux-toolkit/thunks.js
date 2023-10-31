@@ -1,6 +1,6 @@
 import axios from "axios";
-import { setAllGenres, setAllVideogames, setCombinedFilter, setVideogameByGenres, setVideogameById, setVideogamesByName, setVideogamesBySource, startLoading } from "./videogamesSlice";
-import { combinedFilter, filterByGenres, filterBySource } from "../utils/filters";
+import { setAllGenres, setAllVideogames, setFilterByRating, setFilterBySort, setFilterBySourceAndGenres, setVideogameById, setVideogamesByName, startLoading } from "./videogamesSlice";
+import { filterByRating, filterBySort, filterBySourceAndGenres } from "../utils/filters";
 
 // const URL=""
 // const URL = "http://localhost:3001";
@@ -57,51 +57,41 @@ export const getGenres = () => {
    };
 };
 
-export const getFilterBySource = (source) => {
+export const getFilterBySourceAndGenres = (source, genres) => {
    return async (dispatch, getState) => {
       dispatch(startLoading());
       const { auxAllVideogames } = getState().videogames;
       try {
-         if (source !== "ALL") {
-            const videogames = filterBySource(source, auxAllVideogames);
-            return dispatch(setVideogamesBySource(videogames));
-         }
-         return dispatch(setVideogamesBySource(auxAllVideogames));
+         const filtered = filterBySourceAndGenres(auxAllVideogames, source, genres);
+         dispatch(setFilterBySourceAndGenres(filtered));
       } catch (error) {
          throw new Error({ message: error.message });
       }
    };
 };
 
-export const getFilterByGenres = (payload) => {
+export const getFilterBySort = (payload) => {
    return async (dispatch, getState) => {
       dispatch(startLoading());
+      const { allVideogames } = getState().videogames;
       try {
-         const { auxSourceVideogames, auxAllVideogames } = getState().videogames;
-         const filtered = filterByGenres(auxSourceVideogames, payload);
-         if (filtered.length > 0) dispatch(setVideogameByGenres(filtered));
-         else dispatch(setVideogameByGenres(auxAllVideogames));
+         const filtered = filterBySort(allVideogames, payload);
+         dispatch(setFilterBySort(filtered));
       } catch (error) {
          throw new Error({ message: error.message });
       }
    };
 };
 
-export const getCombinedFilters = (payload) => {
+export const getFilterByRating = (payload) => {
    return async (dispatch, getState) => {
+      dispatch(startLoading());
       const { allVideogames } = getState().videogames;
       try {
-         const filteredVideogames = combinedFilter(allVideogames, payload);
-         dispatch(setCombinedFilter(filteredVideogames));
+         const filtered = filterByRating(allVideogames, payload);
+         dispatch(setFilterByRating(filtered));
       } catch (error) {
          throw new Error({ message: error.message });
       }
-
    };
-   // return async (dispatch, getState) => {
-   //    const { allVideogames } = getState().videogames;
-   //    // console.log(allVideogames);
-   //    const filteredVideogames = combinedFilter(allVideogames, payload);
-   //    console.log(filteredVideogames);
-   // };
 };
