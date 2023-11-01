@@ -35,7 +35,7 @@ export const Navbar = () => {
 					<i className="pi pi-user"></i>
 					<span>Login</span>
 				</Link>
-				<Link>
+				<Link to={"/create"}>
 					<i className="pi pi-plus"></i>
 					<span>Create</span>
 				</Link>
@@ -77,10 +77,10 @@ export const Navbar = () => {
 							</label>
 							<label className={style.radio}>
 								<input type="radio" name="radio" />
-								<div>
+								<Link to={"/create"}>
 									<i className="pi pi-plus"></i>
 									<span className={style.name}>Create</span>
-								</div>
+								</Link>
 							</label>
 
 							<label className={style.radio}>

@@ -5,6 +5,7 @@ import { Button } from "primereact/button";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
+	getAllVideogames,
 	getFilterByRating,
 	getFilterBySort,
 	getFilterBySourceAndGenres,
@@ -70,13 +71,9 @@ export const Filters = () => {
 	}, [dispatch, value.rating, value.sort, value.source, value.genres]);
 	//!---------------------------
 
-	const navigete = useNavigate();
-	const location = useLocation();
-
 	const handleRefresh = () => {
-		location.pathname === "/videogames"
-			? window.location.reload()
-			: navigete("/videogames");
+		dispatch(getAllVideogames());
+		setValue(initialState);
 	};
 
 	return (

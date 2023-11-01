@@ -163,12 +163,26 @@
       text-align: center;
    }
 
-   .radio div {
+   .radio{
+      justify-content: center;
+   }
+
+   .radio div{
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
+      text-decoration: none;
+   }
+
+   .radio a {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      text-decoration: none;
    }
 
    .radioInputs .radio input {

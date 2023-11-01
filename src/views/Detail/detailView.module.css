@@ -9,6 +9,14 @@
    margin: 2rem;
 }
 
+.chart canvas{
+   display: flex;
+   flex-direction: row;
+   padding-bottom: 5rem;
+   width: 20rem;
+   height: 20rem;
+}
+
 .img {
    max-width: 40rem;
 }
