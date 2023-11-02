@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import style from "./filters.module.css";
 import { Dropdown } from "primereact/dropdown";
 import { Button } from "primereact/button";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-	getAllVideogames,
 	getFilterByRating,
 	getFilterBySort,
 	getFilterBySourceAndGenres,
@@ -72,7 +70,7 @@ export const Filters = () => {
 	//!---------------------------
 
 	const handleRefresh = () => {
-		dispatch(getAllVideogames());
+		// dispatch(getAllVideogames());
 		setValue(initialState);
 	};
 

@@ -8,8 +8,19 @@
 }
 
 .empty{
-   text-align: center;
-   margin-bottom: 15rem;
+   padding-right: 2rem;
+   padding-left: 2rem;
+   display: flex;
+   margin-bottom: 3rem;
+   justify-content: center;
+   align-items: center;
+   height: 3rem;
+
+   backdrop-filter: blur(8px) saturate(180%);
+   -webkit-backdrop-filter: blur(16px) saturate(180%);
+   background-color: rgba(17, 25, 40, 0.75);
+   border-radius: 12px;
+   border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 .skeleton{
@@ -43,8 +54,8 @@
    .paginator span>button:nth-child(5) {
       display: none;
    }
-      .skeleton {
-         width: 25rem !important;
-         height: 6rem !important;
-      }
+   .skeleton {
+      width: 25rem !important;
+      height: 6rem !important;
+   }
 }

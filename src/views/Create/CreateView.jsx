@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+	getAllVideogames,
+	getGenres,
+	postVideogame,
+} from "../../redux-toolkit/thunks";
+import { getPlatforms } from "../../utils/platforms";
+import {
+	descriptionValidator,
+	genresValidator,
+	nameValidator,
+	platformsValidator,
+	ratingsValidator,
+} from "../../utils/formValidators";
+
 import { InputText } from "primereact/inputtext";
+import { InputNumber } from "primereact/inputnumber";
 import { InputTextarea } from "primereact/inputtextarea";
 import { MultiSelect } from "primereact/multiselect";
 import { Button } from "primereact/button";
 
+import Swal from "sweetalert2";
 import style from "./createView.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllVideogames, getGenres } from "../../redux-toolkit/thunks";
-import { getPlatforms } from "../../utils/platforms";
-import { InputNumber } from "primereact/inputnumber";
 
 const initialState = {
 	name: "",
@@ -27,6 +40,7 @@ const initialState = {
 		minimum: "",
 		recommended: "",
 	},
+	created: true,
 };
 
 export const CreateView = () => {
@@ -44,10 +58,6 @@ export const CreateView = () => {
 
 	const platforms = getPlatforms(allVideogames);
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		console.log("Click");
-	};
 	const handleBack = () => {
 		window.history.back();
 	};
@@ -83,7 +93,55 @@ export const CreateView = () => {
 		setValue(updatedValue);
 	};
 
-	console.log(value);
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		const nameError = nameValidator(value.name, allVideogames);
+		if (nameError)
+			return Swal.fire({
+				icon: "error",
+				title: "Oops!",
+				text: nameError,
+			});
+		const descriptionError = descriptionValidator(value.description);
+		if (descriptionError)
+			return Swal.fire({
+				icon: "error",
+				title: "Oops!",
+				text: descriptionError,
+			});
+		const platformsError = platformsValidator(value.platforms);
+		if (platformsError)
+			return Swal.fire({
+				icon: "error",
+				title: "Oops!",
+				text: platformsError,
+			});
+		const genresError = genresValidator(value.genres);
+		if (genresError)
+			return Swal.fire({
+				icon: "error",
+				title: "Oops!",
+				text: genresError,
+			});
+		const ratingsError = ratingsValidator(value.ratings);
+		if (ratingsError)
+			return Swal.fire({
+				icon: "error",
+				title: "Oops!",
+				text: ratingsError,
+			});
+		dispatch(postVideogame(value));
+		setValue(initialState);
+		Swal.fire({
+			icon: "success",
+			title: "Videogame has been created successfully",
+			showConfirmButton: false,
+			timer: 2000,
+		});
+	};
+
+	// console.log(value);
 
 	return (
 		<div className={style.container}>
