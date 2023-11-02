@@ -146,7 +146,7 @@ export const Filters = () => {
 								onChange={handleChangeSort}
 								options={sort}
 								optionLabel="name"
-								// showClear
+								showClear
 								name="sort"
 								placeholder="Select a sort"
 								className={`${style.custom__dropdown} w-full md:w-14rem`}
@@ -161,7 +161,7 @@ export const Filters = () => {
 									onChange={handleChangeRating}
 									options={rating}
 									optionLabel="name"
-									// showClear
+									showClear
 									name="rating"
 									placeholder="Select a rating"
 									className={`${style.custom__dropdown} w-full md:w-14rem`}

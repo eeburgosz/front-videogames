@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
-import { InputNumber } from "primereact/inputnumber";
 import { MultiSelect } from "primereact/multiselect";
 import { Button } from "primereact/button";
 
@@ -9,6 +8,7 @@ import style from "./createView.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllVideogames, getGenres } from "../../redux-toolkit/thunks";
 import { getPlatforms } from "../../utils/platforms";
+import { InputNumber } from "primereact/inputnumber";
 
 const initialState = {
 	name: "",
@@ -18,13 +18,13 @@ const initialState = {
 	genres: [],
 	platforms: [],
 	ratings: [
-		{ title: "skip", percent: null },
-		{ title: "meh", percent: null },
-		{ title: "recommended", percent: null },
-		{ title: "exceptional", percent: null },
+		{ title: "skip", percent: 0 },
+		{ title: "meh", percent: 0 },
+		{ title: "recommended", percent: 0 },
+		{ title: "exceptional", percent: 0 },
 	],
 	requirements: {
-		minimun: "",
+		minimum: "",
 		recommended: "",
 	},
 };
@@ -54,46 +54,33 @@ export const CreateView = () => {
 
 	const [value, setValue] = useState(initialState);
 
+	const handleRequirements = (e) => {
+		setValue({
+			...value,
+			requirements: {
+				...value.requirements,
+				[e.target.name]: e.target.value,
+			},
+		});
+	};
+
 	const handleChange = (e) => {
-		// console.log(e.target.value);
 		setValue({
 			...value,
 			[e.target.name]: e.target.value,
 		});
 	};
 	const handleRating = (e) => {
-		const { name, value: percent } = e.target;
-		console.log(name);
-		console.log(value);
-
-		// setValue({
-		// 	...value,
-		// 	ratings: [
-		// 		...value.ratings,
-		// 		{
-
-		// 		},
-		// 	],
-		// });
-		const ratingIndex = value.ratings.findIndex(
-			(rating) => rating.title === name
-		);
-
-		if (ratingIndex !== -1) {
-			// Clona el estado actual
-			const updatedValue = { ...value };
-
-			// Clona el array de ratings y actualiza el campo 'percent' del rating correspondiente
-			updatedValue.ratings = value.ratings.map((rating, index) => {
-				if (index === ratingIndex) {
-					return { ...rating, percent: percent };
-				}
-				return rating;
-			});
-
-			// Actualiza el estado con el nuevo valor
-			setValue(updatedValue);
-		}
+		const name = e.originalEvent.target.name;
+		const percent = e.value;
+		const updatedValue = { ...value };
+		updatedValue.ratings = value.ratings.map((rating) => {
+			if (rating.title === name) {
+				return { ...rating, percent };
+			}
+			return rating;
+		});
+		setValue(updatedValue);
 	};
 
 	console.log(value);
@@ -152,9 +139,7 @@ export const CreateView = () => {
 							<span>
 								<i>"Skip"</i>
 							</span>
-							<InputText
-								type="number"
-								// value={value.ratings.percent}
+							<InputNumber
 								name="skip"
 								placeholder="Skip %"
 								onChange={handleRating}
@@ -164,9 +149,7 @@ export const CreateView = () => {
 							<span>
 								<i>"Meh"</i>
 							</span>
-							<InputText
-								type="number"
-								// value={value.ratings.percent || ""}
+							<InputNumber
 								name="meh"
 								placeholder="Meh %"
 								onChange={handleRating}
@@ -176,9 +159,7 @@ export const CreateView = () => {
 							<span>
 								<i>"Recommended"</i>
 							</span>
-							<InputText
-								type="number"
-								// value={value.ratings.percent}
+							<InputNumber
 								name="recommended"
 								placeholder="Recommended %"
 								onChange={handleRating}
@@ -188,9 +169,7 @@ export const CreateView = () => {
 							<span>
 								<i>"Exceptional"</i>
 							</span>
-							<InputText
-								type="number"
-								// value={value.ratings.percent}
+							<InputNumber
 								name="exceptional"
 								placeholder="Exceptional %"
 								onChange={handleRating}
@@ -203,6 +182,7 @@ export const CreateView = () => {
 					<div className={style.__subcontainer}>
 						<span>Platforms</span>
 						<MultiSelect
+							value={value.platforms}
 							name="platforms"
 							options={platforms}
 							optionLabel="name"
@@ -217,6 +197,7 @@ export const CreateView = () => {
 						<span>Genres</span>
 						<div className="card flex justify-content-center">
 							<MultiSelect
+								value={value.genres}
 								name="genres"
 								options={genres}
 								optionLabel="name"
@@ -235,21 +216,23 @@ export const CreateView = () => {
 						<div className={style.__subcontainer}>
 							<span>Minimum</span>
 							<InputTextarea
+								// value={value.requirements.minimun}
 								name="minimum"
 								id=""
 								cols="50"
 								rows="5"
-								onChange={handleChange}
+								onChange={handleRequirements}
 							/>
 						</div>
 						<div className={style.__subcontainer}>
 							<span>Recommended</span>
 							<InputTextarea
+								// value={value.requirements.recommended}
 								name="recommended"
 								id=""
 								cols="50"
 								rows="5"
-								onChange={handleChange}
+								onChange={handleRequirements}
 							/>
 						</div>
 					</div>
