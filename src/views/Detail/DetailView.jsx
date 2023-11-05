@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getVideogameById } from "../../redux-toolkit/videogames/thunks";
 import { useParams } from "react-router-dom";
-import { getVideogameById } from "../../redux-toolkit/thunks";
 import { Chart } from "primereact/chart";
 import style from "./detailView.module.css";
 import { Fieldset } from "primereact/fieldset";

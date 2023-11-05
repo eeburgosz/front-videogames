@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import style from "./navbar.module.css";
+import { getVideogamesByName } from "../../redux-toolkit/videogames/thunks";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getVideogamesByName } from "../../redux-toolkit/thunks";
+import { Dialog } from "primereact/dialog";
 
 export const Navbar = () => {
+	const [visible, setVisible] = useState(false);
+
 	const dispatch = useDispatch();
 
 	const [toggle, setToggle] = useState(false);
@@ -31,7 +34,7 @@ export const Navbar = () => {
 				<code>Nombre</code>
 			</div>
 			<div className={style.containerLinks}>
-				<Link>
+				<Link onClick={() => setVisible(true)}>
 					<i className="pi pi-user"></i>
 					<span>Login</span>
 				</Link>
@@ -70,10 +73,10 @@ export const Navbar = () => {
 						<div className={style.radioInputs}>
 							<label className={style.radio}>
 								<input type="radio" name="radio" />
-								<div>
+								<Link onClick={() => setVisible(true)}>
 									<i className="pi pi-user"></i>
 									<span className={style.name}>Login</span>
-								</div>
+								</Link>
 							</label>
 							<label className={style.radio}>
 								<input type="radio" name="radio" />
@@ -94,6 +97,13 @@ export const Navbar = () => {
 					</div>
 				</>
 			) : null}
+
+			<Dialog
+				header="Login"
+				visible={visible}
+				style={{ width: "50vw" }}
+				onHide={() => setVisible(false)}
+			></Dialog>
 		</div>
 	);
 };

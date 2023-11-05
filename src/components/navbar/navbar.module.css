@@ -165,6 +165,7 @@
 
    .radio{
       justify-content: center;
+      text-decoration: none;
    }
 
    .radio div{
@@ -183,6 +184,7 @@
       justify-content: center;
       gap: 0.5rem;
       text-decoration: none;
+      color: black;
    }
 
    .radioInputs .radio input {

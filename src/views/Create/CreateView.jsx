@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-	getAllVideogames,
-	getGenres,
-	postVideogame,
-} from "../../redux-toolkit/thunks";
+
 import { getPlatforms } from "../../utils/platforms";
 import {
 	descriptionValidator,
@@ -22,6 +18,11 @@ import { Button } from "primereact/button";
 
 import Swal from "sweetalert2";
 import style from "./createView.module.css";
+import {
+	getAllVideogames,
+	getGenres,
+	postVideogame,
+} from "../../redux-toolkit/videogames/thunks";
 
 const initialState = {
 	name: "",
@@ -53,7 +54,7 @@ export const CreateView = () => {
 	const {
 		allVideogames,
 		allGenres: genres,
-		isLoading,
+		// isLoading,
 	} = useSelector((state) => state.videogames);
 
 	const platforms = getPlatforms(allVideogames);

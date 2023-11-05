@@ -1,14 +1,19 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import { ViewRoutes } from "./ViewRoutes";
-import { LandingPage } from "../views";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { CreateView, DetailView, HomeView } from "../views";
+import { AuthRoutes } from "./AuthRoutes";
 
-export const AppRoutes = () => {
+export const ViewRoutes = () => {
 	return (
 		<div>
 			<Routes>
-				<Route exact path="/" element={<LandingPage />} />
-				<Route path="/*" element={<ViewRoutes />} />
+				<Route exact path="/videogames" element={<HomeView />} />
+				<Route path="/videogame/:id" element={<DetailView />} />
+				<Route path="/create" element={<CreateView />} />
+
+				<Route path="/auth/*" element={<AuthRoutes />} />
+
+				<Route path="/*" element={<Navigate to={"/videogames"} />} />
 			</Routes>
 		</div>
 	);

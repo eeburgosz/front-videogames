@@ -3,13 +3,14 @@ import style from "./filters.module.css";
 import { Dropdown } from "primereact/dropdown";
 import { Button } from "primereact/button";
 import { useDispatch, useSelector } from "react-redux";
+
+import { Skeleton } from "primereact/skeleton";
 import {
 	getFilterByRating,
 	getFilterBySort,
 	getFilterBySourceAndGenres,
 	getGenres,
-} from "../../redux-toolkit/thunks";
-import { Skeleton } from "primereact/skeleton";
+} from "../../redux-toolkit/videogames/thunks";
 
 const initialState = {
 	source: "ALL",

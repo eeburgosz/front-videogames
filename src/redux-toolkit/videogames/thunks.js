@@ -9,11 +9,12 @@ import {
 	setVideogamesByName,
 	startLoading,
 } from "./videogamesSlice";
+
 import {
 	filterByRating,
 	filterBySort,
 	filterBySourceAndGenres,
-} from "../utils/filters";
+} from "./../../utils/filters";
 
 // const URL=""
 // const URL = "http://localhost:3001";

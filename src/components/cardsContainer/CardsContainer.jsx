@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./cardsContainer.module.css";
+import { getAllVideogames } from "../../redux-toolkit/videogames/thunks";
 import { Card } from "../";
-import { getAllVideogames } from "../../redux-toolkit/thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { Paginator } from "primereact/paginator";
 import { Skeleton } from "primereact/skeleton";
