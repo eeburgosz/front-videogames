@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import style from "./loginPage.module.css";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Link } from "react-router-dom";
 import { Divider } from "primereact/divider";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	checkingAuthentication,
 	checkingAuthenticationWithGithub,
@@ -18,6 +18,10 @@ export const LoginPage = () => {
 		email: "",
 		password: "",
 	};
+
+	const { status } = useSelector((state) => state.auth);
+
+	const isAuthenticating = useMemo(() => status === "checking", [status]);
 
 	const [formValue, setFormValue] = useState(initialState);
 
@@ -70,19 +74,21 @@ export const LoginPage = () => {
 						</span>
 					</div>
 					<div className={style.buttons}>
-						<Button label="Login" type="submit" />
+						<Button disabled={isAuthenticating} label="Login" type="submit" />
 					</div>
 				</form>
 				<Divider layout="horizontal" className="flex md:hidden" align="center">
 					<b>OR</b>
 				</Divider>
 				<Button
+					disabled={isAuthenticating}
 					onClick={handleGoogleSignIn}
 					label="Login with Google"
 					type="submit"
 					icon="pi pi-google"
 				/>
 				<Button
+					disabled={isAuthenticating}
 					onClick={handleGithubSignIn}
 					label="Login with Github"
 					type="submit"

@@ -1,5 +1,5 @@
-import { signInWithGoogle } from "../../firebase/providers";
-import { checkingCredentials, logout } from "./authSlice";
+import { signInWithGithub, signInWithGoogle } from "../../firebase/providers";
+import { checkingCredentials, login, logout } from "./authSlice";
 
 export const checkingAuthentication = ({ email, password }) => {
 	return async (dispatch) => {
@@ -13,12 +13,15 @@ export const checkingAuthenticationWithGoogle = () => {
 	return async (dispatch) => {
 		dispatch(checkingCredentials());
 		const result = await signInWithGoogle();
-		if (!result) dispatch(logout());
+		console.log(result);
+		if (!result.ok) return dispatch(logout(result));
+		dispatch(login(result));
 	};
 };
 
 export const checkingAuthenticationWithGithub = () => {
 	return async (dispatch) => {
 		dispatch(checkingCredentials());
+		const result = await signInWithGithub();
 	};
 };
