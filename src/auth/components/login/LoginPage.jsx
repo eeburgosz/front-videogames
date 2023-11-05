@@ -10,6 +10,11 @@ import {
 	checkingAuthenticationWithGithub,
 	checkingAuthenticationWithGoogle,
 } from "../../../redux-toolkit/auth/thunks";
+import {
+	emailValidator,
+	passwordValidator,
+} from "../../../utils/formValidators";
+import Swal from "sweetalert2";
 
 export const LoginPage = () => {
 	const dispatch = useDispatch();
@@ -42,6 +47,20 @@ export const LoginPage = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		const emailError = emailValidator(formValue.email);
+		if (emailError)
+			return Swal.fire({
+				icon: "error",
+				title: "Oops!",
+				text: emailError,
+			});
+		const errorPassword = passwordValidator(formValue.password);
+		if (errorPassword)
+			return Swal.fire({
+				icon: "error",
+				title: "Oops!",
+				text: errorPassword,
+			});
 		dispatch(checkingAuthentication(formValue));
 	};
 
