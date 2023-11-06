@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import style from "./navbar.module.css";
 import { getVideogamesByName } from "../../redux-toolkit/videogames/thunks";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { Dialog } from "primereact/dialog";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux-toolkit/auth/authSlice";
 
 export const Navbar = () => {
-	const [visible, setVisible] = useState(false);
-
 	const dispatch = useDispatch();
 
 	const [toggle, setToggle] = useState(false);
 	const [value, setValue] = useState("");
+
+	const { status } = useSelector((state) => state.auth);
 
 	const handleClick = (e) => {
 		setToggle(e.target.checked);
@@ -27,6 +27,10 @@ export const Navbar = () => {
 		dispatch(getVideogamesByName(value));
 	};
 
+	const handleLogout = () => {
+		dispatch(logout());
+	};
+
 	return (
 		<div className={style.container}>
 			<div className={style.containerImage}>
@@ -34,11 +38,18 @@ export const Navbar = () => {
 				<code>Nombre</code>
 			</div>
 			<div className={style.containerLinks}>
-				<Link onClick={() => setVisible(true)}>
-					<i className="pi pi-user"></i>
-					<span>Login</span>
-				</Link>
-				<Link to={"/create"}>
+				{status === "authenticated" ? (
+					<Link onClick={handleLogout}>
+						<i className="pi pi-user"></i>
+						<span>Logout</span>
+					</Link>
+				) : (
+					<Link to="/auth/login">
+						<i className="pi pi-user"></i>
+						<span>Login</span>
+					</Link>
+				)}
+				<Link to={status === "authenticated" ? "/create" : "/auth/login"}>
 					<i className="pi pi-plus"></i>
 					<span>Create</span>
 				</Link>
@@ -73,14 +84,23 @@ export const Navbar = () => {
 						<div className={style.radioInputs}>
 							<label className={style.radio}>
 								<input type="radio" name="radio" />
-								<Link onClick={() => setVisible(true)}>
-									<i className="pi pi-user"></i>
-									<span className={style.name}>Login</span>
-								</Link>
+								{status === "authenticated" ? (
+									<Link onClick={handleLogout}>
+										<i className="pi pi-user"></i>
+										<span className={style.name}>Logout</span>
+									</Link>
+								) : (
+									<Link to="/auth/login">
+										<i className="pi pi-user"></i>
+										<span className={style.name}>Login</span>
+									</Link>
+								)}
 							</label>
 							<label className={style.radio}>
 								<input type="radio" name="radio" />
-								<Link to={"/create"}>
+								<Link
+									to={status === "authenticated" ? "/create" : "/auth/login"}
+								>
 									<i className="pi pi-plus"></i>
 									<span className={style.name}>Create</span>
 								</Link>
@@ -97,13 +117,6 @@ export const Navbar = () => {
 					</div>
 				</>
 			) : null}
-
-			<Dialog
-				header="Login"
-				visible={visible}
-				style={{ width: "50vw" }}
-				onHide={() => setVisible(false)}
-			></Dialog>
 		</div>
 	);
 };
