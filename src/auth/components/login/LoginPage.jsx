@@ -6,15 +6,16 @@ import { Link } from "react-router-dom";
 import { Divider } from "primereact/divider";
 import { useDispatch, useSelector } from "react-redux";
 import {
-	checkingAuthentication,
 	checkingAuthenticationWithGithub,
 	checkingAuthenticationWithGoogle,
+	startLoginWithEmailAndPassword,
 } from "../../../redux-toolkit/auth/thunks";
 import {
 	emailValidator,
 	passwordValidator,
 } from "../../../utils/formValidators";
 import Swal from "sweetalert2";
+import { Message } from "primereact/message";
 
 export const LoginPage = () => {
 	const dispatch = useDispatch();
@@ -24,7 +25,7 @@ export const LoginPage = () => {
 		password: "",
 	};
 
-	const { status } = useSelector((state) => state.auth);
+	const { status, errorMessage } = useSelector((state) => state.auth);
 
 	const isAuthenticating = useMemo(() => status === "checking", [status]);
 
@@ -61,7 +62,7 @@ export const LoginPage = () => {
 				title: "Oops!",
 				text: errorPassword,
 			});
-		dispatch(checkingAuthentication(formValue));
+		dispatch(startLoginWithEmailAndPassword(formValue));
 	};
 
 	return (
@@ -92,6 +93,13 @@ export const LoginPage = () => {
 							<label htmlFor="password">Password</label>
 						</span>
 					</div>
+					{errorMessage ? (
+						<Message
+							severity="error"
+							text={errorMessage}
+							style={{ marginBottom: "1rem", width: "20rem" }}
+						/>
+					) : null}
 					<div className={style.buttons}>
 						<Button disabled={isAuthenticating} label="Login" type="submit" />
 					</div>

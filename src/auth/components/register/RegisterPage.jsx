@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import style from "./registerPage.module.css";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
@@ -9,13 +9,24 @@ import {
 	repeatPasswordValidator,
 } from "../../../utils/formValidators";
 import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { startRegisteringWithEmailAndPassword } from "../../../redux-toolkit/auth/thunks";
+import { Message } from "primereact/message";
 
 export const RegisterPage = () => {
+	const dispatch = useDispatch();
+
 	const initialState = {
 		email: "",
 		password: "",
 		repeatPassword: "",
 	};
+
+	const { status, errorMessage } = useSelector((state) => state.auth);
+	const isCheckingAuthentication = useMemo(
+		() => status === "checking",
+		[status]
+	);
 
 	const [formRegister, setFormRegister] = useState(initialState);
 
@@ -26,8 +37,6 @@ export const RegisterPage = () => {
 			[name]: value,
 		});
 	};
-
-	console.log(formRegister);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -54,6 +63,12 @@ export const RegisterPage = () => {
 				title: "Oops!",
 				text: errorRepeatPassword,
 			});
+		dispatch(
+			startRegisteringWithEmailAndPassword(
+				formRegister.email,
+				formRegister.password
+			)
+		);
 	};
 
 	return (
@@ -96,8 +111,19 @@ export const RegisterPage = () => {
 						<label htmlFor="repeat-password">Repeat password</label>
 					</span>
 				</div>
+				{errorMessage ? (
+					<Message
+						severity="error"
+						text={errorMessage}
+						style={{ marginBottom: "1rem", width: "20rem" }}
+					/>
+				) : null}
 				<div className={style.buttons}>
-					<Button label="Register" type="submit" />
+					<Button
+						label="Register"
+						type="submit"
+						disabled={isCheckingAuthentication}
+					/>
 				</div>
 				<div className={style.link}>
 					<Link to={"/auth/login"}>Or sign in</Link>

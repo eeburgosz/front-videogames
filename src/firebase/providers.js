@@ -1,7 +1,10 @@
 import {
 	GithubAuthProvider,
 	GoogleAuthProvider,
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
 	signInWithPopup,
+	// updateProfile,
 } from "firebase/auth";
 import { FirebaseAuth } from "./config";
 
@@ -28,10 +31,9 @@ export const signInWithGoogle = async () => {
 		};
 	} catch (error) {
 		// const errorCode= error.errorCode
-		const errorMessage = error.message;
 		return {
 			ok: false,
-			errorMessage,
+			errorMessage: error.message,
 		};
 	}
 };
@@ -52,10 +54,59 @@ export const signInWithGithub = async () => {
 			accessToken,
 		};
 	} catch (error) {
+		return {
+			ok: false,
+			errorMessage: error.message,
+		};
+	}
+};
+
+export const registerUserWithEmailAndPassword = async (
+	email,
+	password /*, displayName */
+) => {
+	try {
+		const result = await createUserWithEmailAndPassword(
+			FirebaseAuth,
+			email,
+			password
+		);
+		const { photoURL, uid } = result.user;
+		//! Si en el formulario pongo un username mandado como displayName, se puede actualizar de la siguiente manera. Queda comentado.
+		// await updateProfile(FirebaseAuth.currentUser, {displayName})
+		//! En este caso en particular no lo hago porque mi formulario de registro solo tiene email y password.
+		return {
+			ok: true,
+			email,
+			uid,
+			photoURL,
+		};
+	} catch (error) {
 		const errorMessage = error.message;
 		return {
 			ok: false,
 			errorMessage,
+		};
+	}
+};
+
+export const loginWithEmailAndPassword = async (email, password) => {
+	try {
+		const result = await signInWithEmailAndPassword(
+			FirebaseAuth,
+			email,
+			password
+		);
+		const { photoURL, uid } = result.user;
+		return {
+			ok: true,
+			uid,
+			photoURL,
+		};
+	} catch (error) {
+		return {
+			ok: false,
+			errorMessage: error.message,
 		};
 	}
 };
