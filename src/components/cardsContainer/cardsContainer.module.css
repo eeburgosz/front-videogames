@@ -7,6 +7,7 @@
    margin-top: 2rem;
 }
 
+
 .empty{
    padding-right: 2rem;
    padding-left: 2rem;
@@ -30,12 +31,16 @@
 
 @media (max-width: 768px) {
    .container {
-      height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-bottom: 1rem;
    }
+
+      .menu{
+         width: 100%;
+         text-align: center;
+      }
 
    .cards__container {
       display: flex;
@@ -58,5 +63,8 @@
    .skeleton {
       width: 25rem !important;
       height: 6rem !important;
+   }
+   .empty{
+      margin-bottom: 25rem;
    }
 }

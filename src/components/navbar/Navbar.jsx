@@ -3,19 +3,24 @@ import style from "./navbar.module.css";
 import { getVideogamesByName } from "../../redux-toolkit/videogames/thunks";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../redux-toolkit/auth/authSlice";
+//!-----------------------------------------------------------
+import { Sidebar } from "primereact/sidebar";
+import { Button } from "primereact/button";
+import { startLogout } from "../../redux-toolkit/auth/thunks";
+//!-----------------------------------------------------------
+import noPic from "../../assets/noProfilePic.png";
 
 export const Navbar = () => {
+	//!----------------------------------------
+	const [visible, setVisible] = useState(false);
+	//!----------------------------------------
 	const dispatch = useDispatch();
 
-	const [toggle, setToggle] = useState(false);
+	const { displayName, photoURL, email } = useSelector((state) => state.auth);
+
 	const [value, setValue] = useState("");
 
 	const { status } = useSelector((state) => state.auth);
-
-	const handleClick = (e) => {
-		setToggle(e.target.checked);
-	};
 
 	const handleChange = (e) => {
 		setValue(e.target.value);
@@ -28,14 +33,18 @@ export const Navbar = () => {
 	};
 
 	const handleLogout = () => {
-		dispatch(logout());
+		dispatch(startLogout());
 	};
 
 	return (
 		<div className={style.container}>
 			<div className={style.containerImage}>
-				<img src="asdas" alt="Foto de perfil" />
-				<code>Nombre</code>
+				{status === "authenticated" ? (
+					<>
+						<img src={photoURL || noPic} alt="Foto de perfil" />
+						<code>Hola, {displayName || email}</code>
+					</>
+				) : null}
 			</div>
 			<div className={style.containerLinks}>
 				{status === "authenticated" ? (
@@ -69,7 +78,63 @@ export const Navbar = () => {
 			</div>
 			{window.innerWidth <= 768 ? (
 				<>
-					<input
+					<div
+						className={`card flex justify-content-center ${style.hamburger}`}
+					>
+						<Sidebar visible={visible} onHide={() => setVisible(false)}>
+							<h2 className={style.menu}>Menu</h2>
+							<div className={style.__containerImage}>
+								{status === "authenticated" ? (
+									<>
+										<img src={photoURL || noPic} alt="Foto de perfil" />
+										<code>Hola, {displayName?.split(" ")[0] || email}!</code>
+									</>
+								) : null}
+							</div>
+							<div className={style.radioInputs}>
+								<label className={style.radio}>
+									<input type="radio" name="radio" />
+									{status === "authenticated" ? (
+										<Link onClick={handleLogout}>
+											<i className="pi pi-user"></i>
+											<span className={style.name}>Logout</span>
+										</Link>
+									) : (
+										<Link to="/auth/login">
+											<i className="pi pi-user"></i>
+											<span className={style.name}>Login</span>
+										</Link>
+									)}
+								</label>
+								<label className={style.radio}>
+									<input type="radio" name="radio" />
+									<Link
+										to={status === "authenticated" ? "/create" : "/auth/login"}
+									>
+										<i className="pi pi-plus"></i>
+										<span className={style.name}>Create</span>
+									</Link>
+								</label>
+
+								<label className={style.radio}>
+									<input type="radio" name="radio" />
+									<Link>
+										<i className="pi pi-info-circle"></i>
+										<span className={style.name}>About me</span>
+									</Link>
+								</label>
+							</div>
+						</Sidebar>
+						<Button icon="pi pi-arrow-right" onClick={() => setVisible(true)} />
+					</div>
+				</>
+			) : null}
+		</div>
+	);
+};
+
+/* 
+<input
 						type="checkbox"
 						id="checkbox"
 						className={style.checkbox}
@@ -115,8 +180,4 @@ export const Navbar = () => {
 							</label>
 						</div>
 					</div>
-				</>
-			) : null}
-		</div>
-	);
-};
+*/

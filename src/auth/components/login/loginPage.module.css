@@ -52,3 +52,25 @@
    gap: 1rem;
    margin-bottom: 1rem;
 }
+
+.goBack {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   margin-left: 1rem;
+   margin-bottom: 1rem;
+   background-color: #5EEAD480;
+}
+
+.goBack:hover {
+   background-color: #5EEAD4;
+}
+
+@media (max-width: 768px) {
+   .goBack {
+         position: fixed;
+         top: 0;
+         bottom: auto;
+         margin-top: 1rem;
+      }
+}

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import style from "./loginPage.module.css";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Divider } from "primereact/divider";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -65,6 +65,11 @@ export const LoginPage = () => {
 		dispatch(startLoginWithEmailAndPassword(formValue));
 	};
 
+	const navigate = useNavigate();
+	const handleBack = () => {
+		navigate("/videogames");
+	};
+
 	return (
 		<div className={style.container}>
 			<div className={style.subcontainer}>
@@ -125,6 +130,11 @@ export const LoginPage = () => {
 					<Link to={"/auth/register"}>Or create an account</Link>
 				</div>
 			</div>
+			<Button
+				icon="pi pi-arrow-left"
+				className={style.goBack}
+				onClick={handleBack}
+			/>
 		</div>
 	);
 };

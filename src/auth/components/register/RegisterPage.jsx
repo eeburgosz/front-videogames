@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import style from "./registerPage.module.css";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import {
 	emailValidator,
 	passwordValidator,
@@ -71,6 +71,11 @@ export const RegisterPage = () => {
 		);
 	};
 
+	const navigate = useNavigate();
+	const handleBack = () => {
+		navigate("/videogames");
+	};
+
 	return (
 		<div className={style.container}>
 			<form className={style.subcontainer} onSubmit={handleSubmit}>
@@ -129,6 +134,11 @@ export const RegisterPage = () => {
 					<Link to={"/auth/login"}>Or sign in</Link>
 				</div>
 			</form>
+			<Button
+				icon="pi pi-arrow-left"
+				className={style.goBack}
+				onClick={handleBack}
+			/>
 		</div>
 	);
 };
