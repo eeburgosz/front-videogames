@@ -51,11 +51,9 @@ export const CreateView = () => {
 		dispatch(getGenres());
 		dispatch(getAllVideogames());
 	}, [dispatch]);
-	const {
-		allVideogames,
-		allGenres: genres,
-		// isLoading,
-	} = useSelector((state) => state.videogames);
+	const { allVideogames, allGenres: genres } = useSelector(
+		(state) => state.videogames
+	);
 
 	const platforms = getPlatforms(allVideogames);
 
@@ -141,8 +139,6 @@ export const CreateView = () => {
 			timer: 2000,
 		});
 	};
-
-	// console.log(value);
 
 	return (
 		<div className={style.container}>
@@ -275,7 +271,6 @@ export const CreateView = () => {
 						<div className={style.__subcontainer}>
 							<span>Minimum</span>
 							<InputTextarea
-								// value={value.requirements.minimun}
 								name="minimum"
 								id=""
 								cols="50"
@@ -286,7 +281,6 @@ export const CreateView = () => {
 						<div className={style.__subcontainer}>
 							<span>Recommended</span>
 							<InputTextarea
-								// value={value.requirements.recommended}
 								name="recommended"
 								id=""
 								cols="50"

@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from "react";
-import style from "./loginPage.module.css";
-import { Button } from "primereact/button";
-import { InputText } from "primereact/inputtext";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { Divider } from "primereact/divider";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "primereact/button";
+import { Divider } from "primereact/divider";
+import { InputText } from "primereact/inputtext";
+import { Message } from "primereact/message";
 import {
 	checkingAuthenticationWithGithub,
 	checkingAuthenticationWithGoogle,
@@ -14,8 +14,9 @@ import {
 	emailValidator,
 	passwordValidator,
 } from "../../../utils/formValidators";
+
 import Swal from "sweetalert2";
-import { Message } from "primereact/message";
+import style from "./loginPage.module.css";
 
 export const LoginPage = () => {
 	const dispatch = useDispatch();
@@ -109,23 +110,29 @@ export const LoginPage = () => {
 						<Button disabled={isAuthenticating} label="Login" type="submit" />
 					</div>
 				</form>
-				<Divider layout="horizontal" className="flex md:hidden" align="center">
+				<Divider
+					layout="horizontal"
+					className="flex md:hidden mb-3"
+					align="center"
+				>
 					<b>OR</b>
 				</Divider>
-				<Button
-					disabled={isAuthenticating}
-					onClick={handleGoogleSignIn}
-					label="Login with Google"
-					type="submit"
-					icon="pi pi-google"
-				/>
-				<Button
-					disabled={isAuthenticating}
-					onClick={handleGithubSignIn}
-					label="Login with Github"
-					type="submit"
-					icon="pi pi-github"
-				/>
+				<div className={style.auth}>
+					<Button
+						disabled={isAuthenticating}
+						onClick={handleGoogleSignIn}
+						label="Login with Google"
+						type="submit"
+						icon="pi pi-google"
+					/>
+					<Button
+						disabled={isAuthenticating}
+						onClick={handleGithubSignIn}
+						label="Login with Github"
+						type="submit"
+						icon="pi pi-github"
+					/>
+				</div>
 				<div className={style.link}>
 					<Link to={"/auth/register"}>Or create an account</Link>
 				</div>

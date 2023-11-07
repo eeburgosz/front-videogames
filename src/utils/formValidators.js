@@ -35,5 +35,5 @@ export const passwordValidator = (password) => {
 };
 
 export const repeatPasswordValidator = (password, repeatPassword) => {
-	// if (password !== repeatPassword) return "Password must be the same";
+	if (password !== repeatPassword) return "Password must be the same";
 };

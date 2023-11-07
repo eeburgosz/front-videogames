@@ -1,17 +1,18 @@
 import React, { useMemo, useState } from "react";
-import style from "./registerPage.module.css";
-import { InputText } from "primereact/inputtext";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { InputText } from "primereact/inputtext";
+import { Message } from "primereact/message";
+import { startRegisteringWithEmailAndPassword } from "../../../redux-toolkit/auth/thunks";
 import {
 	emailValidator,
 	passwordValidator,
 	repeatPasswordValidator,
 } from "../../../utils/formValidators";
+
 import Swal from "sweetalert2";
-import { useDispatch, useSelector } from "react-redux";
-import { startRegisteringWithEmailAndPassword } from "../../../redux-toolkit/auth/thunks";
-import { Message } from "primereact/message";
+import style from "./registerPage.module.css";
 
 export const RegisterPage = () => {
 	const dispatch = useDispatch();
@@ -55,6 +56,7 @@ export const RegisterPage = () => {
 				text: errorPassword,
 			});
 		const errorRepeatPassword = repeatPasswordValidator(
+			formRegister.password,
 			formRegister.repeatPassword
 		);
 		if (errorRepeatPassword)

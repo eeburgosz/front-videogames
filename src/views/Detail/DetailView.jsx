@@ -9,6 +9,8 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { Skeleton } from "primereact/skeleton";
 
+import noImage from "../../assets/noImage.jpg";
+
 const skeleton = (
 	<>
 		<Skeleton className={style.img__skeleton}></Skeleton>
@@ -31,7 +33,6 @@ export const DetailView = () => {
 	const [visible, setVisible] = useState(false);
 
 	const ratings = videogame.ratings;
-	// console.log(videogame);
 
 	const [chartData, setChartData] = useState({});
 	const [chartOptions, setChartOptions] = useState({});
@@ -95,7 +96,11 @@ export const DetailView = () => {
 				<>{skeleton}</>
 			) : (
 				<>
-					<img className={style.img} src={videogame.img} alt={videogame.name} />
+					<img
+						className={style.img}
+						src={videogame.img || noImage}
+						alt={videogame.name}
+					/>
 					<h1 className={style.name}>{videogame.name}</h1>
 					<span>Released: {videogame.released}</span>
 					<div className={style.description}>
@@ -125,7 +130,7 @@ export const DetailView = () => {
 													""
 												)}.png`) || false
 											}
-											alt=""
+											alt={platform.name}
 										/>
 										<span>{platform.name}</span>
 									</div>

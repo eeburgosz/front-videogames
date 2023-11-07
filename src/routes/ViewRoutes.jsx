@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { DetailView, HomeView, LandingPage } from "../views";
-import { AuthRoutes } from "./AuthRoutes";
+import { AuthRoutes } from "./";
 
 export const ViewRoutes = () => {
 	return (

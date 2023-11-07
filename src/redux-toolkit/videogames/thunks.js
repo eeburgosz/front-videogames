@@ -50,10 +50,8 @@ export const getVideogamesByName = (name) => {
 		dispatch(startLoading());
 		try {
 			const { data } = await axios.get(`${URL}/videogames?name=${name}`);
-			console.log(data);
 			dispatch(setVideogamesByName(data));
 		} catch (error) {
-			console.log({ message: error.message });
 			dispatch(setVideogamesByName([]));
 		}
 	};
@@ -116,6 +114,33 @@ export const getFilterByRating = (payload) => {
 
 export const postVideogame = (payload) => {
 	return async (dispatch) => {
-		console.log(payload);
+		dispatch(startLoading());
+		const {
+			name,
+			img,
+			description,
+			released,
+			genres,
+			platforms,
+			ratings,
+			requirements,
+			created,
+		} = payload;
+		try {
+			const postData = {
+				name,
+				img,
+				description,
+				released,
+				genres: genres.map((genre) => genre.name),
+				platforms,
+				ratings,
+				requirements,
+				created,
+			};
+			await axios.post(`${URL}/videogame/create`, postData);
+		} catch (error) {
+			throw new Error({ message: error.message });
+		}
 	};
 };

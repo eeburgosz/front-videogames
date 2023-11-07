@@ -20,6 +20,8 @@ export const CardsContainer = () => {
 	const { allVideogames: data, isLoading } = useSelector(
 		(state) => state.videogames
 	);
+
+	// console.log(data);
 	const [first, setFirst] = useState(0);
 	const [rows, setRows] = useState(15);
 

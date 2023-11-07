@@ -2,13 +2,14 @@ import React from "react";
 import style from "./card.module.css";
 import { Button } from "primereact/button";
 import { Link } from "react-router-dom";
+import noImage from "../../assets/noImage.jpg";
 
 export const Card = ({ id, name, img, Genres }) => {
 	return (
 		<>
 			<div className={style.card__}>
 				<div className={style.card__front}>
-					<img className={style.card__image} src={img} alt={name} />
+					<img className={style.card__image} src={img || noImage} alt={name} />
 					<span>{name}</span>
 				</div>
 				<div className={style.card__content}>
@@ -31,7 +32,7 @@ export const Card = ({ id, name, img, Genres }) => {
 			{/* ----------------------------------------------- */}
 
 			<Link to={`/videogame/${id}`} className={style.card}>
-				<img src={img} alt={name} className={style.img} />
+				<img src={img || noImage} alt={name} className={style.img} />
 				<div className={style.textBox}>
 					<div className={style.textContent}>
 						<p className={style.h1}>{name}</p>

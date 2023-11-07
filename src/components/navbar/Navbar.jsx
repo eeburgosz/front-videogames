@@ -42,7 +42,7 @@ export const Navbar = () => {
 				{status === "authenticated" ? (
 					<>
 						<img src={photoURL || noPic} alt="Foto de perfil" />
-						<code>Hola, {displayName || email}</code>
+						<code>Hola, {displayName?.split(" ")[0] || email}!</code>
 					</>
 				) : null}
 			</div>
