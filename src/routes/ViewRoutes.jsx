@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { DetailView, HomeView, LandingPage } from "../views";
+import { AbaoutMe, DetailView, HomeView, LandingPage } from "../views";
 import { AuthRoutes } from "./";
 
 export const ViewRoutes = () => {
@@ -10,6 +10,7 @@ export const ViewRoutes = () => {
 			<Route path="/videogames" element={<HomeView />} />
 			<Route path="/videogame/:id" element={<DetailView />} />
 			<Route path="/auth/*" element={<AuthRoutes />} />
+			<Route path="/aboutMe" element={<AbaoutMe />} />
 			<Route path="/*" element={<Navigate to="/videogames" />} />
 		</Routes>
 	);

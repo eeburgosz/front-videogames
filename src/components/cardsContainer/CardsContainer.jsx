@@ -21,7 +21,6 @@ export const CardsContainer = () => {
 		(state) => state.videogames
 	);
 
-	// console.log(data);
 	const [first, setFirst] = useState(0);
 	const [rows, setRows] = useState(15);
 

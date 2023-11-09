@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import style from "./navbar.module.css";
-import { getVideogamesByName } from "../../redux-toolkit/videogames/thunks";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-//!-----------------------------------------------------------
-import { Sidebar } from "primereact/sidebar";
-import { Button } from "primereact/button";
+import { Link } from "react-router-dom";
+import { getVideogamesByName } from "../../redux-toolkit/videogames/thunks";
 import { startLogout } from "../../redux-toolkit/auth/thunks";
-//!-----------------------------------------------------------
+import { Button } from "primereact/button";
+import { Dialog } from "primereact/dialog";
+import { Sidebar } from "primereact/sidebar";
+import style from "./navbar.module.css";
 import noPic from "../../assets/noProfilePic.png";
 
 export const Navbar = () => {
-	//!----------------------------------------
 	const [visible, setVisible] = useState(false);
-	//!----------------------------------------
+	const [value, setValue] = useState("");
+	const [info, setInfo] = useState(false);
+	const [position, setPosition] = useState("center");
+
 	const dispatch = useDispatch();
 
 	const { displayName, photoURL, email } = useSelector((state) => state.auth);
-
-	const [value, setValue] = useState("");
-
 	const { status } = useSelector((state) => state.auth);
+
+	console.log(email);
 
 	const handleChange = (e) => {
 		setValue(e.target.value);
@@ -36,33 +36,45 @@ export const Navbar = () => {
 		dispatch(startLogout());
 	};
 
+	const show = (position) => {
+		setPosition(position);
+		setInfo(true);
+	};
 	return (
 		<div className={style.container}>
 			<div className={style.containerImage}>
 				{status === "authenticated" ? (
 					<>
-						<img src={photoURL || noPic} alt="Foto de perfil" />
+						<img src={photoURL || noPic} alt="Profile pic" />
 						<code>Hola, {displayName?.split(" ")[0] || email}!</code>
 					</>
 				) : null}
 			</div>
 			<div className={style.containerLinks}>
 				{status === "authenticated" ? (
-					<Link onClick={handleLogout}>
-						<i className="pi pi-user"></i>
-						<span>Logout</span>
-					</Link>
+					<>
+						<Link onClick={handleLogout}>
+							<i className="pi pi-user"></i>
+							<span>Logout</span>
+						</Link>
+						<Link to="/create">
+							<i className="pi pi-plus"></i>
+							<span>Create</span>
+						</Link>
+					</>
 				) : (
-					<Link to="/auth/login">
-						<i className="pi pi-user"></i>
-						<span>Login</span>
-					</Link>
+					<>
+						<Link to="/auth/login">
+							<i className="pi pi-user"></i>
+							<span>Login</span>
+						</Link>
+						<Link onClick={() => show("top")}>
+							<i className="pi pi-plus"></i>
+							<span>Create</span>
+						</Link>
+					</>
 				)}
-				<Link to={status === "authenticated" ? "/create" : "/auth/login"}>
-					<i className="pi pi-plus"></i>
-					<span>Create</span>
-				</Link>
-				<Link>
+				<Link to="/aboutMe">
 					<i className="pi pi-info-circle"></i>
 					<span>About me</span>
 				</Link>
@@ -95,30 +107,38 @@ export const Navbar = () => {
 								<label className={style.radio}>
 									<input type="radio" name="radio" />
 									{status === "authenticated" ? (
-										<Link onClick={handleLogout}>
-											<i className="pi pi-user"></i>
-											<span className={style.name}>Logout</span>
-										</Link>
+										<>
+											<Link onClick={handleLogout}>
+												<i className="pi pi-user"></i>
+												<span className={style.name}>Logout</span>
+											</Link>
+											<label className={style.radio}>
+												<input type="radio" name="radio" />
+												<Link to="/create">
+													<i className="pi pi-plus"></i>
+													<span className={style.name}>Create</span>
+												</Link>
+											</label>
+										</>
 									) : (
-										<Link to="/auth/login">
-											<i className="pi pi-user"></i>
-											<span className={style.name}>Login</span>
-										</Link>
+										<>
+											<Link to="/auth/login">
+												<i className="pi pi-user"></i>
+												<span className={style.name}>Login</span>
+											</Link>
+											<label className={style.radio}>
+												<input type="radio" name="radio" />
+												<Link onClick={() => show("top")}>
+													<i className="pi pi-plus"></i>
+													<span className={style.name}>Create</span>
+												</Link>
+											</label>
+										</>
 									)}
 								</label>
 								<label className={style.radio}>
 									<input type="radio" name="radio" />
-									<Link
-										to={status === "authenticated" ? "/create" : "/auth/login"}
-									>
-										<i className="pi pi-plus"></i>
-										<span className={style.name}>Create</span>
-									</Link>
-								</label>
-
-								<label className={style.radio}>
-									<input type="radio" name="radio" />
-									<Link>
+									<Link to="/aboutMe">
 										<i className="pi pi-info-circle"></i>
 										<span className={style.name}>About me</span>
 									</Link>
@@ -129,55 +149,29 @@ export const Navbar = () => {
 					</div>
 				</>
 			) : null}
+
+			<Dialog
+				header="Wait..."
+				visible={info}
+				position={position}
+				style={{ width: "50vw" }}
+				onHide={() => setInfo(false)}
+				draggable={false}
+				resizable={false}
+			>
+				<p className="m-0">
+					In order to create a videogame, you must first be logged in. Do you
+					want to log in?
+				</p>
+				<div className={style.dialogButtons}>
+					<Link onClick={() => setInfo(false)}>
+						<Button label="No" icon="pi pi-times" className="p-button-text" />
+					</Link>
+					<Link to="/auth/login">
+						<Button label="Yes" icon="pi pi-check" />
+					</Link>
+				</div>
+			</Dialog>
 		</div>
 	);
 };
-
-/* 
-<input
-						type="checkbox"
-						id="checkbox"
-						className={style.checkbox}
-						onClick={handleClick}
-					/>
-					<label htmlFor="checkbox" className={style.toggle}>
-						<div className={`${style.bars} ${style.bar1}`}></div>
-						<div className={`${style.bars} ${style.bar2}`}></div>
-						<div className={`${style.bars} ${style.bar3}`}></div>
-					</label>
-					<div className={toggle ? style.menu : style.menuHidden}>
-						<div className={style.radioInputs}>
-							<label className={style.radio}>
-								<input type="radio" name="radio" />
-								{status === "authenticated" ? (
-									<Link onClick={handleLogout}>
-										<i className="pi pi-user"></i>
-										<span className={style.name}>Logout</span>
-									</Link>
-								) : (
-									<Link to="/auth/login">
-										<i className="pi pi-user"></i>
-										<span className={style.name}>Login</span>
-									</Link>
-								)}
-							</label>
-							<label className={style.radio}>
-								<input type="radio" name="radio" />
-								<Link
-									to={status === "authenticated" ? "/create" : "/auth/login"}
-								>
-									<i className="pi pi-plus"></i>
-									<span className={style.name}>Create</span>
-								</Link>
-							</label>
-
-							<label className={style.radio}>
-								<input type="radio" name="radio" />
-								<div>
-									<i className="pi pi-info-circle"></i>
-									<span className={style.name}>About me</span>
-								</div>
-							</label>
-						</div>
-					</div>
-*/

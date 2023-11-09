@@ -90,16 +90,18 @@ export const registerUserWithEmailAndPassword = async (
 	}
 };
 
-export const loginWithEmailAndPassword = async (email, password) => {
+export const loginWithEmailAndPassword = async (mail, password) => {
 	try {
 		const result = await signInWithEmailAndPassword(
 			FirebaseAuth,
-			email,
+			mail,
 			password
 		);
-		const { photoURL, uid } = result.user;
+		const { photoURL, uid, email } = result.user;
+		console.log(result.user);
 		return {
 			ok: true,
+			email, //! Mandé este email para que llegue toda la info al mismo tiempo y se renderice todo por igual
 			uid,
 			photoURL,
 		};

@@ -16,8 +16,6 @@ import {
 	filterBySourceAndGenres,
 } from "./../../utils/filters";
 
-// const URL=""
-// const URL = "http://localhost:3001";
 const URL = "https://backvideogames-2jow.onrender.com";
 
 export const getAllVideogames = () => {
