@@ -1,0 +1,19 @@
+.container{
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   margin-top: 3rem;
+   margin-bottom: 3rem;
+}
+
+.subcontainer{
+   width: 80%;
+   align-self: center;
+   text-align: justify;
+}
+
+.buttonsContainer{
+   padding-top: 2rem;
+   display: flex;
+   justify-content: space-around;
+}

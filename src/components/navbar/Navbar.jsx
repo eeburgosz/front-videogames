@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getVideogamesByName } from "../../redux-toolkit/videogames/thunks";
@@ -19,8 +19,6 @@ export const Navbar = () => {
 
 	const { displayName, photoURL, email } = useSelector((state) => state.auth);
 	const { status } = useSelector((state) => state.auth);
-
-	console.log(email);
 
 	const handleChange = (e) => {
 		setValue(e.target.value);
@@ -145,7 +143,7 @@ export const Navbar = () => {
 								</label>
 							</div>
 						</Sidebar>
-						<Button icon="pi pi-arrow-right" onClick={() => setVisible(true)} />
+						<Button icon="pi pi-bars" onClick={() => setVisible(true)} />
 					</div>
 				</>
 			) : null}

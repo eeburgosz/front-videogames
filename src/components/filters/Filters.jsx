@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Skeleton } from "primereact/skeleton";
 import {
+	getAllVideogames,
 	getFilterByRating,
 	getFilterBySort,
 	getFilterBySourceAndGenres,
@@ -71,7 +72,7 @@ export const Filters = () => {
 	//!---------------------------
 
 	const handleRefresh = () => {
-		// dispatch(getAllVideogames());
+		dispatch(getAllVideogames());
 		setValue(initialState);
 	};
 
