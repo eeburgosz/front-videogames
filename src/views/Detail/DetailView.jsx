@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogameById } from "../../redux-toolkit/videogames/thunks";
 import { useParams } from "react-router-dom";
-import { Chart } from "primereact/chart";
-import style from "./detailView.module.css";
-import { Fieldset } from "primereact/fieldset";
+import { getVideogameById } from "../../redux-toolkit/videogames/thunks";
 import { Button } from "primereact/button";
+import { Chart } from "primereact/chart";
 import { Dialog } from "primereact/dialog";
+import { Fieldset } from "primereact/fieldset";
 import { Skeleton } from "primereact/skeleton";
-
+import style from "./detailView.module.css";
 import noImage from "../../assets/noImage.jpg";
 
 const skeleton = (

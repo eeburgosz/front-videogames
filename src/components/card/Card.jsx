@@ -1,7 +1,7 @@
 import React from "react";
-import style from "./card.module.css";
-import { Button } from "primereact/button";
 import { Link } from "react-router-dom";
+import { Button } from "primereact/button";
+import style from "./card.module.css";
 import noImage from "../../assets/noImage.jpg";
 
 export const Card = ({ id, name, img, Genres }) => {

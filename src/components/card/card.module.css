@@ -79,11 +79,12 @@
    color: #ffffff95;
 }
 
-.info{
+.info {
    height: 1rem;
 }
 
 @media (max-width: 768px) {
+
    .card__ {
       display: none;
    }
@@ -118,11 +119,10 @@
       background: linear-gradient(#d7cfcf, #9198e5);
    }
 
-
    .textBox {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;      
+      justify-content: space-between;
       width: calc(100% - 90px);
       margin-left: 10px;
       margin-right: 10px;
@@ -148,8 +148,6 @@
       justify-content: center;
       text-align: center;
       overflow-wrap: break-word;
-      /* flex-wrap: wrap; */
-      /* margin-top: 1.5rem; */
       font-size: 16px;
       font-weight: bold;
       width: 100%;

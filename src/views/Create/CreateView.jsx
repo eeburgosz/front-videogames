@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { getPlatforms } from "../../utils/platforms";
+import {
+	getAllVideogames,
+	getGenres,
+	postVideogame,
+} from "../../redux-toolkit/videogames/thunks";
 import {
 	descriptionValidator,
 	genresValidator,
@@ -9,20 +12,14 @@ import {
 	platformsValidator,
 	ratingsValidator,
 } from "../../utils/formValidators";
-
-import { InputText } from "primereact/inputtext";
+import { getPlatforms } from "../../utils/platforms";
+import { Button } from "primereact/button";
 import { InputNumber } from "primereact/inputnumber";
+import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { MultiSelect } from "primereact/multiselect";
-import { Button } from "primereact/button";
-
 import Swal from "sweetalert2";
 import style from "./createView.module.css";
-import {
-	getAllVideogames,
-	getGenres,
-	postVideogame,
-} from "../../redux-toolkit/videogames/thunks";
 
 const initialState = {
 	name: "",

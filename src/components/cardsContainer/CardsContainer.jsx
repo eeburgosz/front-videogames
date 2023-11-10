@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import style from "./cardsContainer.module.css";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllVideogames } from "../../redux-toolkit/videogames/thunks";
 import { Card } from "../";
-import { useDispatch, useSelector } from "react-redux";
 import { Paginator } from "primereact/paginator";
 import { Skeleton } from "primereact/skeleton";
+import style from "./cardsContainer.module.css";
 
 const skeletons = [];
 for (let i = 0; i < 15; i++) {

@@ -1,6 +1,6 @@
 import React from "react";
-import style from "./homeView.module.css";
 import { Navbar, CardsContainer, Filters, Footer } from "../../components/";
+import style from "./homeView.module.css";
 
 export const HomeView = () => {
 	return (

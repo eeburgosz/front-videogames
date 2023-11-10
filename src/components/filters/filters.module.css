@@ -23,8 +23,6 @@
    height: 25rem !important;
 }
 
-/*  */
-
 .input__container {
    display: flex;
    flex-direction: column;
@@ -100,8 +98,6 @@
    transform: translateX(calc(var(--container_width) * 2/3));
 }
 
-/*  */
-
 .custom__dropdown span {
    font-size: 12px !important;
 }
@@ -124,6 +120,7 @@
 }
 
 @media (max-width: 768px) {
+
    .container {
       display: flex;
       padding-top: 1rem;
@@ -148,4 +145,5 @@
       width: 100% !important;
       height: 15rem !important;
    }
+   
 }

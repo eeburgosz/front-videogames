@@ -8,13 +8,14 @@
    position: relative;
    transition: 0.5s;
 }
-.dialog{
- display: flex;
- flex-direction: column;
- width: 60%;
+
+.dialog {
+   display: flex;
+   flex-direction: column;
+   width: 60%;
 }
 
-.dialog h3{
+.dialog h3 {
    margin-top: 0;
    text-align: center;
    font-size: 24px;
@@ -23,7 +24,7 @@
    text-decoration: underline;
 }
 
-.signature{
+.signature {
    display: flex;
    width: 100%;
    flex-direction: column;
@@ -31,10 +32,11 @@
    gap: 3rem;
 }
 
-.signature code{
+.signature code {
    text-align: right;
 }
-.signature button{
+
+.signature button {
    width: 8rem;
    align-self: center;
 }
@@ -67,7 +69,9 @@
 }
 
 @media (max-width: 768px) {
+
    .container {
       overflow: hidden;
    }
+
 }

@@ -42,7 +42,6 @@
    height: 80%;
    font-family: "Noto Sans Mono", "sans-serif";
    color: #fff;
-   /* vertical-align: middle; */
    justify-content: center;
 }
 
@@ -97,8 +96,6 @@
       text-wrap: wrap;
       text-align: center;
       gap: 1rem;
-      /* margin-bottom: 2rem; */
-      
    }
 
    .contactMe {
@@ -113,4 +110,5 @@
    .socialMedia i {
       font-size: 1.5rem;
    }
+   
 }

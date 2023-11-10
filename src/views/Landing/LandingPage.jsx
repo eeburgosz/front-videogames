@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "primereact/button";
+import { Dialog } from "primereact/dialog";
 import style from "./landing.module.css";
 import videoDesktop from "../../assets/landing/background_web.mp4";
 import videoMobile from "../../assets/landing/background_mobile.mp4";
-import { Link } from "react-router-dom";
-import { Dialog } from "primereact/dialog";
 
 export const LandingPage = () => {
 	const [visible, setVisible] = useState(true);

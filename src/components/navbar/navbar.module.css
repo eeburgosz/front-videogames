@@ -90,6 +90,7 @@
 }
 
 @media (max-width: 768px) {
+
    .containerImage {
       display: none;
    }
@@ -164,4 +165,5 @@
    .containerLinks {
       padding: 0;
    }
+   
 }

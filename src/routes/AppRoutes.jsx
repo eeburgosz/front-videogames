@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { CheckingAuth } from "../auth";
 import { ViewRoutesAuth, ViewRoutes } from "./";
+import { CheckingAuth } from "../auth";
 import { useCheckingStatus } from "../hooks";
 
 export const AppRoutes = () => {

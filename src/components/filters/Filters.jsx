@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import style from "./filters.module.css";
-import { Dropdown } from "primereact/dropdown";
-import { Button } from "primereact/button";
 import { useDispatch, useSelector } from "react-redux";
-
-import { Skeleton } from "primereact/skeleton";
 import {
 	getAllVideogames,
 	getFilterByRating,
@@ -12,6 +7,10 @@ import {
 	getFilterBySourceAndGenres,
 	getGenres,
 } from "../../redux-toolkit/videogames/thunks";
+import { Button } from "primereact/button";
+import { Dropdown } from "primereact/dropdown";
+import { Skeleton } from "primereact/skeleton";
+import style from "./filters.module.css";
 
 const initialState = {
 	source: "ALL",

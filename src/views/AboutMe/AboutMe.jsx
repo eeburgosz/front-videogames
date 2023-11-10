@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "primereact/button";
 import { Fieldset } from "primereact/fieldset";
 import style from "./aboutMe.module.css";
-import { Button } from "primereact/button";
-import { Link } from "react-router-dom";
 
 export const AbaoutMe = () => {
 	const [lang, setLang] = useState(false);
@@ -81,8 +81,8 @@ export const AbaoutMe = () => {
 							results.
 							<br />
 							<br />
-							Regarding my current career goals, I am focused on consolidating
-							my career in web development, a constantly evolving field that
+							Regarding my current career goals, I'm focused on consolidating my
+							career in web development, a constantly evolving field that
 							demands continuous learning and adaptability. Additionally, my
 							experience as an electronics engineer has been notable. During my
 							role as Project Manager in an SME in the telecommunications

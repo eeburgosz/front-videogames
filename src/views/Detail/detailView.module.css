@@ -9,7 +9,7 @@
    margin: 2rem;
 }
 
-.chart canvas{
+.chart canvas {
    display: flex;
    flex-direction: row;
    padding-bottom: 5rem;
@@ -127,36 +127,42 @@
    background-color: #5EEAD4;
 }
 
-.img__skeleton{
+.img__skeleton {
    max-width: 40rem !important;
    height: 20rem !important;
    margin-bottom: 2rem !important;
 }
-.name__skeleton{
+
+.name__skeleton {
    max-width: 40rem !important;
    height: 4rem !important;
    margin-bottom: 2rem !important;
 }
-.description__skeleton{
+
+.description__skeleton {
    max-width: 80% !important;
    height: 20rem !important;
    margin-bottom: 2rem !important;
 }
-.info__skeleton{
+
+.info__skeleton {
    max-width: 80% !important;
-      height: 10rem !important;
-      margin-bottom: 2rem !important;
+   height: 10rem !important;
+   margin-bottom: 2rem !important;
 }
-.ratings__skeleton{
+
+.ratings__skeleton {
    max-width: 50% !important;
-      height: 10rem !important;
-      margin-bottom: 2rem !important;
+   height: 10rem !important;
+   margin-bottom: 2rem !important;
 }
 
 @media (max-width: 768px) {
-   .name{
+
+   .name {
       text-align: center;
    }
+
    .platform {
       width: 100vw;
       display: grid;
@@ -170,13 +176,14 @@
       align-items: center !important;
       justify-content: center !important;
    }
-      .chart__position{
-         display: block;
-         width: 30rem !important;
-         align-self: center !important;
-         justify-self: center !important;
 
-      }
+   .chart__position {
+      display: block;
+      width: 30rem !important;
+      align-self: center !important;
+      justify-self: center !important;
+
+   }
 
    .img {
       width: 100vw;

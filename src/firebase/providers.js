@@ -98,7 +98,6 @@ export const loginWithEmailAndPassword = async (mail, password) => {
 			password
 		);
 		const { photoURL, uid, email } = result.user;
-		console.log(result.user);
 		return {
 			ok: true,
 			email, //! Mandé este email para que llegue toda la info al mismo tiempo y se renderice todo por igual
